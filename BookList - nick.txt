@@ -1,0 +1,25 @@
+The Oddysey,Homer,780140268867
+The Colour of Magic,Terry Pratchett,9780861403240
+The Light Fantastic,Terry Pratchett,9780060855888
+The Great Gatsby,F. Scott Fitzgerald,9780435272340
+Pride and Prejudice,Jane Austen,9780192832252
+The Grapes of Wrath,John Steinbeck,9780140008333
+The Color Purple,Alice Walker,9780582784345
+The Sound and the Fury,William Faulkner,9780140020878
+Moby-Dick,Herman Melville,9780393972832
+Eragon,Christopher Paolini,9781856868822
+To Kill a Mockingbird,Harper Lee,9780060173227
+Nineteen Eighty-Four,George Orwell,9780141391700
+Animal Farm,George Orwell,9780151072521
+The Catcher in the Rye,	J. D. Salinger,9780140012484
+Lord of the Flies,William Golding,9780140283334
+The Hitchhikers Guide to the Galaxy,Douglas Adams,9780330508117
+A Game of Thrones,George R. R. Martin,9780008209100
+The Hobbit or There and Back Again,J. R. R. Tolkien,9780007458424
+The Fellowship of the Ring,J. R. R. Tolkien,9780007203581
+The Two Towers,J. R. R. Tolkien,9780007136568
+The Return of the King,J. R. R. Tolkien,9780007149230
+Mort,Terry Pratchett,9780552131063
+A Tale of Two Cities,Charles Dickens,9780140430547
+Don Quixote,Miguel de Cervantes,9780192741653
+The Count of Monte Cristo,Alexandre Dumas,9780192827159
