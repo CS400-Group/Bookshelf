@@ -13,30 +13,30 @@
 
 public class Book {
 	
-	private String title;
-	private String author;
-	private Long isbn;
+	public String title;
+	public String author;
+	public Long isbn;
 	
 	//Notes
 	//	1) You should use 13 digit ISBNs, 10 digit ISBNs are deprecated
 	//	2) We have to use long as 13 digits is out of the range of int
 	//
-	public Book(String title, String author, Long isbn) {
-		title = this.title;
-		author = this.author;
-		isbn = this.isbn;
+	public Book(String title1, String author1, Long isbn1) {
+		title = title1;
+		author = author1;
+		isbn = isbn1;
 	}
 	
 	public String getTitle() {
-		return title;
+		return this.title;
 	}
 	
 	public String getAuthor() {
-		return author;
+		return this.author;
 	}
 	
 	public long getIsbn() {
-		return isbn;
+		return this.isbn;
 	}
 	
 	//Notes
@@ -45,6 +45,7 @@ public class Book {
 	//	2. The key is the book's hash code in an Integer(uppercase) wrapper
 	//	3. Integer.hashCode() returns the int primitive that is wrapped, so when the HashTableMap calls key.hashCode() it returns the same value as book.hashCode()
 	public Integer generateKey() {
-		return Integer.valueOf(hashCode());
+		return Integer.valueOf(title.hashCode());
 	}
+
 }

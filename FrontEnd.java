@@ -14,7 +14,7 @@ public class FrontEnd {
             bookShelfMenu();
             System.out.println("\nType '6' If You Wish To Perform Another Action");
             System.out.println("Type '7' If You Wish To Quit");
-            inputNum = userIn.nextInt();
+            inputNum = Integer.parseInt(userIn.nextLine());
             if (inputNum == 7) {
                 System.out.println("Thank You For Visting. Have A Nice Day.");
                 break;
@@ -45,7 +45,7 @@ public class FrontEnd {
             System.out.println("\t(4): Search For Book On Shelf.");
             System.out.println("\t(5): Clear All Books From Shelf.");
             System.out.println("\t(-1): Exit.");
-            inputNum = Integer.parseInt(userIn.next());
+            inputNum = Integer.parseInt(userIn.nextLine());
             if (!ValidUserInput(validInputs, inputNum)) {
                 System.out.println("Invalid Request. Please Try Again:\n");
             }
@@ -102,13 +102,15 @@ public class FrontEnd {
         System.out.println("You Can Now Add a Book To The Shelf.");
         // Prompt the user to input the information needed to create new book
         System.out.println("\nPlease Enter The TITLE Of The Book You Wish To Add");
-        String title = userIn.next();
+        String title = userIn.nextLine();
         System.out.println("\nPlease Enter The AUTHOR Of The Book You Wish To Add");
-        String author = userIn.next();
+        String author = userIn.nextLine();
         System.out.println("\nPlease Enter The ISBN Of The Book You Wish To Add");
-        Long isbn = Long.parseLong(userIn.next());
+        Long isbn = Long.parseLong(userIn.nextLine());
         // Make the book with the given information, then add to the user's bookshelf
         Book bookToAdd = new Book(title, author, isbn);
+        Integer bookKey = bookToAdd.generateKey();
+        System.out.println(bookKey);
         userBookShelf.add(bookToAdd);
         System.out.println("'" + title + "' Was Added To Your BookShelf.");
     }
@@ -122,15 +124,10 @@ public class FrontEnd {
         System.out.println("You Can Now Remove a Book From The Shelf.");
         // Prompt the user to input the information needed to remove book
         System.out.println("\nPlease Enter The TITLE Of The Book You Wish To Remove");
-        String title = userIn.next();
-        System.out.println("\nPlease Enter The AUTHOR Of The Book You Wish To Remove");
-        String author = userIn.next();
-        System.out.println("\nPlease Enter The ISBN Of The Book You Wish To Remove");
-        Long isbn = Long.parseLong(userIn.next());
-        // Make the book with the given information, find the Integer key for the book,
-        //   then remove from the user's bookshelf
-        Book bookToRemove = new Book(title, author, isbn);
-        Integer removeBookKey = bookToRemove.generateKey();
+        String title = userIn.nextLine();
+        // Remove the book using the hashcode from the title.
+        Integer removeBookKey = Integer.valueOf(title.hashCode());
+        System.out.println(removeBookKey);
         userBookShelf.remove(removeBookKey);
         System.out.println("'" + title + "' Was Removed From Your BookShelf.");
     }
@@ -145,21 +142,21 @@ public class FrontEnd {
         System.out.println("You Can Now Replace A Book On The Shelf.");
         // Prompt the user to input the requested book to remove from book shelf
         System.out.println("\nPlease Enter The TITLE Of The Book You Wish To Remove");
-        String removeTitle = userIn.next();
+        String removeTitle = userIn.nextLine();
         System.out.println("\nPlease Enter The AUTHOR Of The Book You Wish To Remove");
-        String removeAuthor = userIn.next();
+        String removeAuthor = userIn.nextLine();
         System.out.println("\nPlease Enter The ISBN Of The Book You Wish To Remove");
-        Long removeIsbn = Long.parseLong(userIn.next());
+        Long removeIsbn = Long.parseLong(userIn.nextLine());
         Book bookToRemove = new Book(removeTitle, removeAuthor, removeIsbn);
         Integer removeBookKey = bookToRemove.generateKey();
         userBookShelf.remove(removeBookKey);
         // Prompt the user to input the requested book to add to book shelf
         System.out.println("\nPlease Enter The TITLE Of The Book You Wish To Add");
-        String addTitle = userIn.next();
+        String addTitle = userIn.nextLine();
         System.out.println("\nPlease Enter The AUTHOR Of The Book You Wish To Add");
-        String addAuthor = userIn.next();
+        String addAuthor = userIn.nextLine();
         System.out.println("\nPlease Enter The ISBN Of The Book You Wish To Add");
-        Long addIsbn = Long.parseLong(userIn.next());
+        Long addIsbn = Long.parseLong(userIn.nextLine());
         Book bookToAdd = new Book(addTitle, addAuthor, addIsbn);
         userBookShelf.add(bookToAdd);
         System.out.println("'" + removeTitle + "' Was Replaced With '" + addTitle + "'");
@@ -186,7 +183,7 @@ public class FrontEnd {
         System.out.println("Please Type 'Y' (yes) or 'N' (no).");
         char userAnswer = 0;
         while (userAnswer != 'Y' || userAnswer != 'N') {
-            userAnswer = userIn.next().charAt(0);
+            userAnswer = userIn.nextLine().charAt(0);
             if (userAnswer == 'Y') {
                 userBookShelf.clear();
                 System.out.println("Your BookShelf Has Been Cleared.");
