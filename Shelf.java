@@ -19,7 +19,7 @@ public interface Shelf<KeyType, ValueType> {
 	public ValueType get(KeyType key) throws NoSuchElementException;
 	public int size();
 	public boolean containsKey(KeyType key);
-	public boolean replace(ValueType value1, ValueType value2);
+	public boolean replace(String value1, ValueType value2);
 	public ValueType remove(KeyType key); 
 	public void clear();
 	

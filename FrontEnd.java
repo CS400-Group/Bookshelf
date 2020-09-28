@@ -10,8 +10,11 @@ public class FrontEnd {
     public static void main(String[] args) {
         // Run method to display menu to the user and also
         // Ensure the user is done with requested functions.
+
         while (inputNum != -1) {
             bookShelfMenu();
+            if (inputNum == -1)
+                break;
             System.out.println("\nType '6' If You Wish To Perform Another Action");
             System.out.println("Type '7' If You Wish To Quit");
             inputNum = Integer.parseInt(userIn.nextLine());
@@ -25,7 +28,8 @@ public class FrontEnd {
                 break;
             }
         }
-        userIn.close();
+        System.out.println("size is: " + userBookShelf.size())
+;       userIn.close();
     } // End of main
 
 
@@ -140,16 +144,9 @@ public class FrontEnd {
    */
     public static void replaceBook() {
         System.out.println("You Can Now Replace A Book On The Shelf.");
-        // Prompt the user to input the requested book to remove from book shelf
+        // Prompt the user to input the requested book title to remove
         System.out.println("\nPlease Enter The TITLE Of The Book You Wish To Remove");
         String removeTitle = userIn.nextLine();
-        System.out.println("\nPlease Enter The AUTHOR Of The Book You Wish To Remove");
-        String removeAuthor = userIn.nextLine();
-        System.out.println("\nPlease Enter The ISBN Of The Book You Wish To Remove");
-        Long removeIsbn = Long.parseLong(userIn.nextLine());
-        Book bookToRemove = new Book(removeTitle, removeAuthor, removeIsbn);
-        Integer removeBookKey = bookToRemove.generateKey();
-        userBookShelf.remove(removeBookKey);
         // Prompt the user to input the requested book to add to book shelf
         System.out.println("\nPlease Enter The TITLE Of The Book You Wish To Add");
         String addTitle = userIn.nextLine();
@@ -158,7 +155,7 @@ public class FrontEnd {
         System.out.println("\nPlease Enter The ISBN Of The Book You Wish To Add");
         Long addIsbn = Long.parseLong(userIn.nextLine());
         Book bookToAdd = new Book(addTitle, addAuthor, addIsbn);
-        userBookShelf.add(bookToAdd);
+        userBookShelf.replace(removeTitle, bookToAdd);
         System.out.println("'" + removeTitle + "' Was Replaced With '" + addTitle + "'");
     }
 
