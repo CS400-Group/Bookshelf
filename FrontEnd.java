@@ -84,6 +84,12 @@ public class FrontEnd {
         }
     } // End of bookShelfMenu
 
+     /**
+      * readFile will add a file of books from the user and read it.
+      * 
+      * @param
+      * @return
+      */
     public static void readFile() {
         System.out.println("\nPlease Ensure That Your File Displays Books In This Form:");
         System.out.println("\t'Title,Author,ISBN' With One Book Per Line, No Spaces.");
