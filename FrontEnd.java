@@ -1,31 +1,37 @@
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class FrontEnd {
     // Variables needed throughout the program
     public static Scanner userIn = new Scanner(System.in);
     static BookShelf userBookShelf = new BookShelf();
     public static int inputNum = 0;
-    public static int validInputs[] = new int[] { 1, 2, 3, 4, 5, -1 };
+    public static int validInputs[] = new int[] { 1, 2, 3, 4, 5, 6, -1 };
 
     public static void main(String[] args) {
         // Run method to display menu to the user and also
         // Ensure the user is done with requested functions.
+
         while (inputNum != -1) {
             bookShelfMenu();
-            System.out.println("\nType '6' If You Wish To Perform Another Action");
-            System.out.println("Type '7' If You Wish To Quit");
+            if (inputNum == -1)
+                break;
+            System.out.println("\nType '7' If You Wish To Perform Another Action");
+            System.out.println("Type '8' If You Wish To Quit");
             inputNum = Integer.parseInt(userIn.nextLine());
-            if (inputNum == 7) {
+            if (inputNum == 8) {
                 System.out.println("Thank You For Visting. Have A Nice Day.");
                 break;
-            } else if (inputNum == 6) {
+            } else if (inputNum == 7) {
                 System.out.println("Continuing With New Command.\n");
             } else if (!ValidUserInput(validInputs, inputNum)) {
                 System.out.println("Invalid Input. Now Exiting Program.");
                 break;
             }
         }
-        userIn.close();
+        System.out.println(userBookShelf.size());
+;       userIn.close();
     } // End of main
 
 
@@ -44,6 +50,7 @@ public class FrontEnd {
             System.out.println("\t(3): Replace A Book On Shelf");
             System.out.println("\t(4): Search For Book On Shelf.");
             System.out.println("\t(5): Clear All Books From Shelf.");
+            System.out.println("\t(6): Add Multiple Books From .txt File");
             System.out.println("\t(-1): Exit.");
             inputNum = Integer.parseInt(userIn.nextLine());
             if (!ValidUserInput(validInputs, inputNum)) {
@@ -67,12 +74,36 @@ public class FrontEnd {
             case 5:
                 clearShelf();
                 break;
+            case 6:
+                readFile();
+                break;
             case -1:
                 System.out.println("Thank You For Visiting.");
                 break;
 
         }
     } // End of bookShelfMenu
+
+    public static void readFile() {
+        System.out.println("\nPlease Ensure That Your File Displays Books In This Form:");
+        System.out.println("\t'Title,Author,ISBN' With One Book Per Line, No Spaces.");
+        System.out.println("The File Will Not Be Read Correctly Otherwise.");
+        System.out.println("What Is The Exact Name Of The File You Wish To Add?");
+        File bookFile = new File(userIn.nextLine());
+        try {
+            Scanner fileReader = new Scanner(bookFile);
+            while (fileReader.hasNextLine()) {
+                String[] str = fileReader.nextLine().split(",");
+                Book bookToAdd = new Book(str[0].trim(), str[1].trim(), Long.parseLong(str[2].trim()));
+                userBookShelf.add(bookToAdd);
+            }
+            fileReader.close();
+        } 
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Your File Was Succesfully Uploaded.");
+    }
 
     /**
      * ValidUserInput is used to determine if the user inputted a valid input in
@@ -110,7 +141,6 @@ public class FrontEnd {
         // Make the book with the given information, then add to the user's bookshelf
         Book bookToAdd = new Book(title, author, isbn);
         Integer bookKey = bookToAdd.generateKey();
-        System.out.println(bookKey);
         userBookShelf.add(bookToAdd);
         System.out.println("'" + title + "' Was Added To Your BookShelf.");
     }
@@ -127,7 +157,6 @@ public class FrontEnd {
         String title = userIn.nextLine();
         // Remove the book using the hashcode from the title.
         Integer removeBookKey = Integer.valueOf(title.hashCode());
-        System.out.println(removeBookKey);
         userBookShelf.remove(removeBookKey);
         System.out.println("'" + title + "' Was Removed From Your BookShelf.");
     }
@@ -140,16 +169,9 @@ public class FrontEnd {
    */
     public static void replaceBook() {
         System.out.println("You Can Now Replace A Book On The Shelf.");
-        // Prompt the user to input the requested book to remove from book shelf
+        // Prompt the user to input the requested book title to remove
         System.out.println("\nPlease Enter The TITLE Of The Book You Wish To Remove");
         String removeTitle = userIn.nextLine();
-        System.out.println("\nPlease Enter The AUTHOR Of The Book You Wish To Remove");
-        String removeAuthor = userIn.nextLine();
-        System.out.println("\nPlease Enter The ISBN Of The Book You Wish To Remove");
-        Long removeIsbn = Long.parseLong(userIn.nextLine());
-        Book bookToRemove = new Book(removeTitle, removeAuthor, removeIsbn);
-        Integer removeBookKey = bookToRemove.generateKey();
-        userBookShelf.remove(removeBookKey);
         // Prompt the user to input the requested book to add to book shelf
         System.out.println("\nPlease Enter The TITLE Of The Book You Wish To Add");
         String addTitle = userIn.nextLine();
@@ -158,7 +180,7 @@ public class FrontEnd {
         System.out.println("\nPlease Enter The ISBN Of The Book You Wish To Add");
         Long addIsbn = Long.parseLong(userIn.nextLine());
         Book bookToAdd = new Book(addTitle, addAuthor, addIsbn);
-        userBookShelf.add(bookToAdd);
+        userBookShelf.replace(removeTitle, bookToAdd);
         System.out.println("'" + removeTitle + "' Was Replaced With '" + addTitle + "'");
     }
 
@@ -179,6 +201,7 @@ public class FrontEnd {
    */
     public static void clearShelf() {
         System.out.println("Are You Sure You Wish To Clear The BookShelf?");
+        System.out.println("Your BookShelf Contains:" + userBookShelf);
         // Prompt the user to confirm the action of clearing the bookshelf.
         System.out.println("Please Type 'Y' (yes) or 'N' (no).");
         char userAnswer = 0;
@@ -187,6 +210,7 @@ public class FrontEnd {
             if (userAnswer == 'Y') {
                 userBookShelf.clear();
                 System.out.println("Your BookShelf Has Been Cleared.");
+                System.out.println("Your BookShelf Contains:" + userBookShelf);
                 break;
             } else if (userAnswer == 'N') {
                 System.out.println("Your BookShelf Was Not Cleared.");
