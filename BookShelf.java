@@ -37,19 +37,23 @@ public class BookShelf implements Shelf<Integer, Book> {
 	public int size() {
 		return bookshelf.size();
 	}
+
 	public boolean containsKey(Integer key) {
 		return bookshelf.containsKey(key);
 	}
 	
 	//Replaces first Book parameter with second
-	public boolean replace(Book oldBook, Book newBook) {
-		remove(oldBook.generateKey());
+	public boolean replace(String oldBookTitle, Book newBook) {
+		remove(Integer.valueOf(oldBookTitle.hashCode()));
 		return  bookshelf.put(newBook.generateKey(), newBook);
 	}
 	
 	public Book remove(Integer key) {
-		return bookshelf.remove(key);
+		Book removeBook = bookshelf.get(key);
+		bookshelf.remove(key);
+		return removeBook;
 	}
+	
 	public void clear() {
 		bookshelf.clear();
 	}
