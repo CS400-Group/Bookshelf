@@ -18,8 +18,17 @@ public class BookShelf implements Shelf<Integer, Book> {
 	
 	private HashTableMap<Integer, Book> bookshelf;
 	
-	public BookShelf() {
+	public BookShelf() throws FileNotFoundException{
 		bookshelf = new HashTableMap<Integer, Book>();
+		
+		File BookList = new File("BookList.txt");
+		Scanner sc = new Scanner(BookList);
+		
+		while (sc.hasNextLine()) {
+		  String[] str = sc.nextLine().split(",");
+		  Book book = new Book(str[0].trim(),str[1].trim(), Long.parseLong(str[2].trim()));
+		  bookshelf.put(book.generateKey(), book);
+		}
 	}
 	
 	public BookShelf(int capacity) {
