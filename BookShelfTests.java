@@ -21,10 +21,13 @@ public class BookShelfTests {
 		System.out.println("testContainsKey: "+ testContainsKey());
 		System.out.println("testRemove(): " + testRemove());
 		System.out.println("testClear(): " + testClear());
-		
-		//System.out.println("test5: "+ test5());*/
 	}
 	
+	 /**
+     * tests that BookShelf.add() functions properly
+     * 
+     * @return true when functionality is verified
+     */
 	public static boolean testAdd() {
 		BookShelf bookshelf = new BookShelf();
 		Book book = new Book("Catcher in the Rye",  "JD Salinger", 9788172248963L);
@@ -35,6 +38,11 @@ public class BookShelfTests {
 		return false;
 	}
 	
+	/**
+     * tests that BookShelf.get() functions properly
+     * 
+     * @return true when functionality is verified
+     */
 	public static boolean testGet() {
 		BookShelf bookshelf = createShelf();
 		Book book = new Book("Don Quixote",  "Miguel de Cervantes", 9780060934347L);
@@ -45,6 +53,11 @@ public class BookShelfTests {
 		return false;
 	}
 	
+	/**
+     * tests that BookShelf.size() functions properly
+     * 
+     * @return true when functionality is verified
+     */
 	public static boolean testSize() {
 		BookShelf bookshelf = createShelf();
 		Book book = new Book("Crime and Punishment", "Fyodor Dostoyevsky", 9780486415871L);
@@ -55,6 +68,11 @@ public class BookShelfTests {
 		return false;
 	}
 	
+	/**
+     * tests that BookShelf.containsKey() functions properly
+     * 
+     * @return true when functionality is verified
+     */
 	public static boolean testContainsKey() {
 		BookShelf bookshelf = new BookShelf();
 		Book book = new Book("Nineteen Eighty-Four", "George Orwell", 9780451524935L);
@@ -65,6 +83,11 @@ public class BookShelfTests {
 		return false;
 	}
 	
+	/**
+     * tests that BookShelf.remove() functions properly
+     * 
+     * @return true when functionality is verified
+     */
 	public static boolean testRemove() {
 		BookShelf bookshelf = new BookShelf();
 		Book book = new Book("Crime and Punoshment", "Fyodor Dostoyevsky", 9780486415871L);
@@ -76,6 +99,11 @@ public class BookShelfTests {
 		return false;
 	}
 	
+	/**
+     * tests that BookShelf.clear() functions properly
+     * 
+     * @return true when functionality is verified
+     */
 	public static boolean testClear() {
 		BookShelf bookshelf = createShelf();
 		bookshelf.clear();
@@ -86,6 +114,11 @@ public class BookShelfTests {
 		return true;	
 	}
 	
+	/**
+     * Helper methods that creates a bookShelf with 
+     * 
+     * @return bookshelf holding 5 books and with capacity 10
+     */
 	public static BookShelf createShelf() {
 		BookShelf bookshelf = new BookShelf();
 		Book book1 = new Book("The Odyssey", "Homer", 123456789012L);
