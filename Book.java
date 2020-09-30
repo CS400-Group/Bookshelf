@@ -1,6 +1,4 @@
-// Book object class
-
-//////////////////////////////////////////
+/////////////////////////////////////////
 // --== CS400 File Header Information ==--
 // Name: <your full name>
 // Email: <your @wisc.edu email address>
@@ -17,33 +15,53 @@ public class Book {
 	public String author;
 	public Long isbn;
 	
-	//Notes
-	//	1) You should use 13 digit ISBNs, 10 digit ISBNs are deprecated
-	//	2) We have to use long as 13 digits is out of the range of int
-	//
+	/**
+     * Book constructor
+     * 
+     * @param title1 title of book
+     * @param author1 author of book 
+     * @param isbn1 book's ISBN number
+     * @return added book
+     */
 	public Book(String title1, String author1, Long isbn1) {
 		title = title1;
 		author = author1;
 		isbn = isbn1;
 	}
 	
+	/**
+     * Retrieves title of book
+     * 
+     * @return title of book
+     */
 	public String getTitle() {
 		return this.title;
 	}
 	
+	/**
+     * Retrieves author of book
+     * 
+     * @param book book to add to bookshelf
+     * @return author of book
+     */
 	public String getAuthor() {
 		return this.author;
 	}
 	
+	/**
+     * Retrieves ISBN of book
+     * 
+     * @return ISBN of book
+     */
 	public long getIsbn() {
 		return this.isbn;
 	}
 	
-	//Notes
-	//	1. This is kind of bad solution but made more sense then making a book object both the key and value
-	//	   Could also make the key book.toString()
-	//	2. The key is the book's hash code in an Integer(uppercase) wrapper
-	//	3. Integer.hashCode() returns the int primitive that is wrapped, so when the HashTableMap calls key.hashCode() it returns the same value as book.hashCode()
+	/**
+     * Generates a books key for the hashtable data structure
+     * 
+     * @return key of book in hashtable
+     */
 	public Integer generateKey() {
 		return Integer.valueOf(title.hashCode());
 	}
